@@ -1,0 +1,134 @@
+<body>
+    <br>
+     <div class="container">
+     <div class="row">
+         <div class="col-md-12">
+            <h1 class="text-success">Productos Combustibles y Lubricantes </h1>
+<button class="btn btn-outline-danger float-end" (click)="salir()">Regresar     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+</svg></button>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-dark float-end" role="status">
+                <span class="visually-hidden">loading...</span>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>tipo</th>
+                    <th>unidad</th>
+                    <th>producto</th>
+                    <th>cantidad</th>
+                    <th>precio</th>
+                    <th>estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of productos">
+                    <td>
+                        {{producto.tipo}}
+                    </td>
+                    <td>
+                        {{producto.codUnidad}}
+                    </td>
+                    <td>
+                        {{producto.producto}}
+                    </td>
+                    <td>
+                        {{producto.cantidad}}
+                    </td>
+                    <td>
+                        {{producto.precio}}
+                    </td>
+                    <td>
+                        {{producto.estado}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+      <br>
+      <button class="btn btn-outline-success float-end" (click)="Comprar()">Comprar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+</svg></button><br>
+    <form  id="modificar" *ngIf="modificar">
+        <div class="row">
+        <div class="col-md-12">
+         <h3 class="text-center">Generar Compra</h3>
+             <br>
+                <label class="text-dark"> Empleado:</label>
+                <input [(ngModel)]="codEmpleado" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required>
+                <br>
+                <label class="text-dark"> Telefono:</label>
+                <button class="btn btn-outline-danger float-end" (click)="mostrar1()">Telefonos Disponibles <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone" viewBox="0 0 16 16">
+  <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+  <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg></button>
+                <p *ngIf="ver">
+                <option [value]="item" *ngFor = "let item of cliente.tcliente">{{item.telefono}}</option>
+                </p>
+                <br>
+                <input [(ngModel)]="telefono" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required>
+                <br>
+                <label class="text-dark"> Producto:</label>
+                <select name = "miselect1"  [(ngModel)]="producto" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required><br>
+                <option [value]="item" *ngFor = "let item of lista1">{{item}}</option>
+                </select>
+                <br>
+                <label class="text-dark">Cantidad:</label>
+                <input [(ngModel)]="cantidad" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required>
+                <br>
+                <label class="text-dark">Costo:</label>
+                <input [(ngModel)]="costo" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required>
+                <br>
+                <label class="text-dark">Tipo Pago:</label>
+               <select name = "miselect1"  [(ngModel)]="tipoPago" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required><br>
+                <option [value]="item" *ngFor = "let item of lista">{{item}}</option>
+                </select>
+                <br>
+                <label class="text-dark">Fecha Emision:</label>
+                <input [(ngModel)]="fechaEmision" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required><br>
+              <button class="btn btn-outline-primary float-end" (click)="GuardarFactura()">Generar     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
+  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+  <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+</svg></button>
+             <br>
+             <br>
+        </div>
+        </div>
+    </form>
+      <br>
+     </div>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     </body>
+

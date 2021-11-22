@@ -1,0 +1,9 @@
+body{
+  background-image: url(umg.jpeg) ;
+ }
+ 
+ .container{
+   background-color: rgba(7, 6, 6, 0.822);
+   height: 430px;
+   width: 520px;
+ }

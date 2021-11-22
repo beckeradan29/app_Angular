@@ -1,0 +1,142 @@
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-white bg-dark">Adan Becker Martinez Martinez UMG </h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-danger float-right" role="status">
+                <span class="sr-only">loading...</span>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <br>
+    <div class="row">
+    <div class="col-md-12">
+        <label class="float-right"> <a href="/"> Regresar</a></label>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-12">
+    <h1 class="text-white">Crear Curso; <button class="btn btn-danger" (click)="agregar()">Crear     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+</svg></button></h1>
+</div>
+</div>
+    <form (ngSubmit) = "crearCurso()" id="crear" *ngIf="crear">
+     <br>
+     <div class="row">
+        <div class="col-md-12">
+        <label class="text-white">Ingresar Materia Del Curso</label>
+           <input type="text" [(ngModel)]="curso.materia" [ngModelOptions]="{standalone: true}" placeholder="materia" class="form-control" required>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+        <label class="text-white">Ingresar Dia de imparticion</label>
+           <input type="text" [(ngModel)]="curso.dia" [ngModelOptions]="{standalone: true}" placeholder="Dia de imparticion" class="form-control" required>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+        <label class="text-white">Ingresar Duracion del curso</label>
+           <input type="text" [(ngModel)]="curso.duracion" [ngModelOptions]="{standalone: true}" placeholder="Duracion del curso" class="form-control" required>
+        </div>
+    </div>
+    <br>
+     <div class="row">
+      <div class="col-md-12">
+          <button class="btn btn-danger float-right" >Guardar     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+</svg></button>
+<button class="btn btn-warning float-right" (click)="nuevo()">Nuevo     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+</svg></button>
+      </div>
+     </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered table-primary">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Materia</th>
+                    <th>Dia</th>
+                    <th>Duracion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let curso of cursos">
+                    <td>
+                        {{curso.idcurso}}
+                    </td>
+                    <td>
+                        {{curso.materia}}
+                    </td>
+                    <td>
+                        {{curso.dia}}
+                    </td>
+                    <td>
+                        {{curso.duracion}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="text" [(ngModel)]="codigo" [ngModelOptions]="{standalone: true}"
+                placeholder="Ingrese codigo de Curso" class="form-control" required>
+                <br>
+                <button class="btn btn-success float-right" (click)="buscarCursoId()" (click)="agregar1()">Mostrar    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-all-fill" viewBox="0 0 16 16">
+  <path d="M8.021 11.9 3.453 8.62a.719.719 0 0 1 0-1.238L8.021 4.1a.716.716 0 0 1 1.079.619V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+  <path d="M5.232 4.293a.5.5 0 0 1-.106.7L1.114 7.945a.5.5 0 0 1-.042.028.147.147 0 0 0 0 .252.503.503 0 0 1 .042.028l4.012 2.954a.5.5 0 1 1-.593.805L.539 9.073a1.147 1.147 0 0 1 0-1.946l3.994-2.94a.5.5 0 0 1 .699.106z"/>
+</svg></button>
+                <button class="btn btn-danger float-right" (click)="borrarCurso()">Eliminar   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+  <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+</svg> </button>
+                <br>
+        </div>
+    </div>
+    <br>
+    <form (ngSubmit)="ModificarCurso()" id="modificar" *ngIf="modificar">
+        <div class="row" *ngFor="let entrada of entradas">
+          <div class="col-md-12">
+            <label class="text-white">Materia del curso</label>
+            <input type="text" [(ngModel)]="entrada.materia" [ngModelOptions]="{standalone: true}"
+             class="form-control" required><br>
+             <label class="text-white">Dia de imparticion</label>
+             <input type="text" [(ngModel)]="entrada.dia" [ngModelOptions]="{standalone: true}"
+             class="form-control" required><br>
+             <label class="text-white">Duracion del curso</label>
+             <input type="text" [(ngModel)]="entrada.duracion" [ngModelOptions]="{standalone: true}"
+             class="form-control" required><br>
+              <button class="btn btn-primary float-right" >Modificar     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+  <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+</svg></button>
+             <br>
+             <br>
+          </div>
+        </div>
+    </form>
+    <br><br><br><br><br><br><br><br><br>
+</div>
+</body>

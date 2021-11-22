@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-dark">Clientes de la empresa</h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-danger float-end" role="status">
+                <span class="visually-hidden">loading...</span>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row">
+    <div class="col-md-12">
+        <label class="float-end"> <a href="/admin"> Regresar</a></label>
+    </div>
+    </div>
+    <br><h4>Clientes Actualmente</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nit</th>
+                    <th>Cui</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Genero</th>
+                    <th>direccion</th>
+                    <th>telefono</th>
+                    <th>eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of entradas">
+                    <td>
+                        {{producto.nit}}
+                    </td>
+                    <td>
+                        {{producto.cui}}
+                    </td>
+                    <td>
+                      {{producto.nombre+" "+producto.apellido}}
+                    </td>
+                    <td>
+                        {{producto.correo}}
+                    </td>
+                    <td>
+                        {{producto.genero}}
+                    </td>
+                    <td>
+                        <ul>
+                        <li *ngFor="let direccion of producto.dcliente">{{direccion.direccion}}</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                        <li *ngFor="let telefono of producto.tcliente">{{telefono.telefono}}</li>
+                        </ul>
+                    </td>
+                     <td>
+                       <button class="btn btn-success btn-sm float-end" (click)="eliminarCliente(producto)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+   <br>
+</div>
+

@@ -1,0 +1,278 @@
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-dark">Control Empleados</h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-warning float-end" role="status">
+                <span class="visually-hidden">loading...</span>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <br>
+    <div class="row">
+    <div class="col-md-12">
+        <label class="float-end"> <a href="/admin"> Regresar</a></label>
+    </div>
+    </div>
+     <br><h4>Sucurales Cargados</h4>
+              <br>
+       <div class="row">
+        <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>cod</th>
+                    <th>Municipio</th>
+                    <th>nombre_sucursal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of sucursal">
+                    <td>
+                        {{producto.codsucursal}}
+                    </td>
+                    <td>
+                        {{producto.codMunicipio}}
+                    </td>
+                    <td>
+                        {{producto.nombre_sucursal}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br><h4>Turnos Cargados</h4>
+              <br>
+       <div class="row">
+        <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>cod</th>
+                    <th>turno</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of turno">
+                    <td>
+                        {{producto.idturno}}
+                    </td>
+                    <td>
+                        {{producto.turno}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+     <br><h4>Puestos Cargados</h4>
+              <br>
+       <div class="row">
+        <div class="col-md-6">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>cod</th>
+                    <th>puesto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of puesto">
+                    <td>
+                        {{producto.idpuesto}}
+                    </td>
+                    <td>
+                        {{producto.puesto}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+    <div class="col-md-12">
+    <h1 class="text-dark">Crear Empleado <button class="btn btn-danger" (click)="agregar()">Crear     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+  <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+</svg></button></h1>
+</div>
+</div>
+    <form  id="crear" *ngIf="crear">
+     <br>
+     <div class="row">
+        <div class="col-md-6">
+        <label class="text-dark">cod Turno</label>
+           <input type="text" [(ngModel)]="producto.idTurno" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+        </div>
+    </div>
+    <br>
+     <div class="row">
+         <div class="col-md-6">
+         <label class="text-dark">Cod Sucursal</label>
+            <input type="number" [(ngModel)]="producto.codSucursal" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+         <div class="col-md-6">
+         <label class="text-dark">Cod puesto</label>
+            <input type="number" [(ngModel)]="producto.idPuesto" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+         <div class="col-md-6">
+         <label class="text-dark">Cui</label>
+            <input type="text" [(ngModel)]="producto.cui" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+         <div class="col-md-6">
+         <label class="text-dark">Nombre</label>
+            <input type="text" [(ngModel)]="producto.nombre" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+         <div class="col-md-6">
+         <label class="text-dark">Apellido</label>
+            <input type="text" [(ngModel)]="producto.apellido" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+       <br>
+       <div class="row">
+         <div class="col-md-6">
+         <label class="text-dark">correo</label>
+            <input type="email" [(ngModel)]="producto.correo" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+       <br>
+       <div class="row">
+        <div class="col-md-6">
+        <label class="text-dark">Genero</label>
+           <select name = "miselect1"  [(ngModel)]="producto.genero" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required><br>
+                <option [value]="item" *ngFor = "let item of lista">{{item}}</option>
+                </select> 
+      </div>
+    </div>
+    <br>
+       <div class="row">
+         <div class="col-md-6">
+         <label class="text-dark">Fecha Ingreso</label>
+            <input type="text" [(ngModel)]="producto.fechaIngreso" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+       <br>
+       <div class="row">
+         <div class="col-md-6">
+       Telefonos: <button class="btn btn-warning btn-sm" (click)="agregarTelefono()">Agregar</button>
+       </div>
+     </div>
+     <div class="row" *ngFor ="let telefono of producto.etelefono">
+       <br><br> 
+         <div class="col-md-4">
+          <input type="text" [(ngModel)]="telefono.telefonoo" [ngModelOptions]="{standalone: true}" placeholder="telefono" class="form-control" required>
+         </div>
+         <div class="col-md-1">
+         <button class="btn btn-danger btn-sm" (click)="borrarTelefono(telefono)">borrar</button>
+         </div>
+     </div>
+     <br>
+       <div class="row">
+         <div class="col-md-6">
+       Direcciones: <button class="btn btn-warning btn-sm" (click)="agregarDireccion()">Agregar</button>
+       </div>
+     </div>
+     <div class="row" *ngFor ="let direccion of producto.edireccion">
+       <br><br> 
+         <div class="col-md-4">
+          <input type="text" [(ngModel)]="direccion.direccion" [ngModelOptions]="{standalone: true}" placeholder="direccion" class="form-control" required>
+         </div>
+         <div class="col-md-1">
+         <button class="btn btn-danger btn-sm" (click)="borrarDireccion(direccion)">borrar</button>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+      <div class="col-md-6">
+          <button class="btn btn-primary btn-sm float-end" (click)="crearProducto()">Crear</button>
+      </div>
+     </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>  
+                    <th>Turno</th>
+                    <th>Sucural</th>
+                    <th>Puesto</th>
+                    <th>Nombre</th>
+                    <th>Cui</th>
+                    <th>correo</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
+                    <th>genero</th>
+                    <th>eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of productos">
+                    <td>
+                        {{producto.idTurno}}
+                    </td>
+                    <td>
+                        {{producto.codSucursal}}
+                    </td>
+                    <td>
+                        {{producto.idPuesto}}
+                    </td>
+                     <td>
+                        {{producto.nombre+" "+producto.apellido}}
+                    </td>
+                     <td>
+                        {{producto.cui}}
+                    </td>
+                     <td>
+                        {{producto.correo}}
+                    </td>
+                     <td>
+                       <ul>
+                       <li *ngFor = "let telefono of producto.etelefono">{{telefono.telefonoo}}</li>
+                       </ul>
+                    </td>
+                    <td>
+                       <ul>
+                       <li *ngFor = "let direccion of producto.edireccion">{{direccion.direccion}}</li>
+                       </ul>
+                    </td>
+                    <td>
+                        {{producto.genero}}
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-sm float-end" (click)="eliminarEmpleado(producto)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br>
+</div>
+</body>
+
+

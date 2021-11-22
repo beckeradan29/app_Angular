@@ -1,0 +1,193 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-dark">Comprar Producto</h1>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+    <div class="row" *ngIf="loading">
+        <div class="col-md-12">
+            <div class="spinner-border text-danger float-end" role="status">
+                <span class="visually-hidden">loading...</span>
+            </div>
+        </div>
+        </div>
+        <br>
+        <div class="row">
+    <div class="col-md-12">
+        <label class="float-end"> <a href="/admin"> Regresar</a></label>
+    </div>
+    </div>
+    <br><h4>Cuenta De Dinero</h4>
+              <br>
+       <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre Cuente</th>
+                    <th>Dinero Disponible</th>
+                    <th>Total Dinero</th>
+                    <th>Ingreso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of productos2">
+                    <td>
+                        {{producto.nombre}}
+                    </td>
+                    <td>
+                        {{producto.total}}
+                    </td>
+                    <td>
+                        {{producto.total1}}
+                    </td>
+                    <td>
+                        {{producto.ingreso}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br><h4>ComprarUn Producto</h4>
+    <button class="btn btn-danger float-right" (click)="agregar()">Comprar Productos</button>
+       <br>
+    <form (ngSubmit) = "crearProducto()" id="crear" *ngIf = "crear">
+     <br>
+     <div class="row">
+        <div class="col-md-12">
+        <label class="text-dark">Proevedor</label>
+           <select name = "miselect1"  [(ngModel)]="producto.proevedor" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required><br>
+                <option [value]="item" *ngFor = "let item of lista">{{item}}</option>
+                </select> 
+      </div>
+    </div>
+    <br>
+     <div class="row">
+         <div class="col-md-12">
+         <label class="text-dark">Producto</label>
+           <select name = "miselect1"  [(ngModel)]="producto.proevedor" type="text" [ngModelOptions]="{standalone: true}"
+                class="form-control"  required><br>
+                <option [value]="item" *ngFor = "let item of lista1">{{item}}</option>
+                </select> 
+     </div>
+     </div>
+     <br>
+     <div class="row">
+         <div class="col-md-12">
+         <label class="text-dark">Ingresar Cantidad</label>
+            <input type="text" [(ngModel)]="producto.cantidad" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+         <div class="col-md-12">
+         <label class="text-dark">Ingresar Precio</label>
+            <input type="text" [(ngModel)]="producto.precio" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+         <div class="col-md-12">
+         <label class="text-dark">Total</label>
+            <input type="text" [(ngModel)]="producto.total" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+         </div>
+     </div>
+     <br>
+     <div class="row">
+      <div class="col-md-12">
+          <button class="btn btn-success float-end" >Comprar     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+       <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+       <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+       </svg></button>
+       </div>
+      </div>
+       </form>
+       <br><h4>Historial Compras</h4>
+              <br>
+       <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>cod</th>
+                    <th>proevedor</th>
+                    <th>producto</th>
+                    <th>cantidad</th>
+                    <th>precio</th>
+                    <th>total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of productos">
+                    <td>
+                        {{producto.idcompra}}
+                    </td>
+                    <td>
+                        {{producto.proevedor}}
+                    </td>
+                    <td>
+                        {{producto.producto}}
+                    </td>
+                    <td>
+                        {{producto.cantidad}}
+                    </td>
+                    <td>
+                        {{producto.precio}}
+                    </td>
+                    <td>
+                        {{producto.total}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br><h4>Actualisando nuevas cantidades</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>tipo</th>
+                    <th>unidad</th>
+                    <th>producto</th>
+                    <th>cantidad</th>
+                    <th>precio</th>
+                    <th>estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let producto of productos1">
+                    <td>
+                        {{producto.tipo}}
+                    </td>
+                    <td>
+                        {{producto.codUnidad}}
+                    </td>
+                    <td>
+                        {{producto.producto}}
+                    </td>
+                    <td>
+                        {{producto.cantidad}}
+                    </td>
+                    <td>
+                        {{producto.precio}}
+                    </td>
+                    <td>
+                        {{producto.estado}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+</div>
+
