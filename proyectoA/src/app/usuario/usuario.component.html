@@ -61,7 +61,7 @@
      <div class="row">
         <div class="col-md-12">
         <label class="text-dark">Proevedor</label>
-           <select name = "miselect1"  [(ngModel)]="producto.proevedor" type="text" [ngModelOptions]="{standalone: true}"
+           <select name = "miselect1"  [(ngModel)]="proevedor" type="text" [ngModelOptions]="{standalone: true}"
                 class="form-control"  required><br>
                 <option [value]="item" *ngFor = "let item of lista">{{item}}</option>
                 </select> 
@@ -71,7 +71,7 @@
      <div class="row">
          <div class="col-md-12">
          <label class="text-dark">Producto</label>
-           <select name = "miselect1"  [(ngModel)]="producto.proevedor" type="text" [ngModelOptions]="{standalone: true}"
+           <select name = "miselect1"  [(ngModel)]="product" type="text" [ngModelOptions]="{standalone: true}"
                 class="form-control"  required><br>
                 <option [value]="item" *ngFor = "let item of lista1">{{item}}</option>
                 </select> 
@@ -81,21 +81,21 @@
      <div class="row">
          <div class="col-md-12">
          <label class="text-dark">Ingresar Cantidad</label>
-            <input type="text" [(ngModel)]="producto.cantidad" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+            <input type="text" [(ngModel)]="cantidad" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
          </div>
      </div>
      <br>
      <div class="row">
          <div class="col-md-12">
          <label class="text-dark">Ingresar Precio</label>
-            <input type="text" [(ngModel)]="producto.precio" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+            <input type="text" [(ngModel)]="precio" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
          </div>
      </div>
      <br>
      <div class="row">
          <div class="col-md-12">
          <label class="text-dark">Total</label>
-            <input type="text" [(ngModel)]="producto.total" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+            <input type="text" [(ngModel)]="total" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
          </div>
      </div>
      <br>

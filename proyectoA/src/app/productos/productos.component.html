@@ -26,7 +26,6 @@
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>tipo</th>
                     <th>unidad</th>
                     <th>producto</th>
                     <th>cantidad</th>
@@ -36,9 +35,6 @@
             </thead>
             <tbody>
                 <tr *ngFor = "let producto of productos">
-                    <td>
-                        {{producto.tipo}}
-                    </td>
                     <td>
                         {{producto.codUnidad}}
                     </td>
@@ -59,6 +55,7 @@
         </table>
         </div>
     </div>
+    <h6>Unidad: 1 = Galon, 2 = Litro</h6>
       <br>
       <button class="btn btn-outline-success float-end" (click)="Comprar()">Comprar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
@@ -69,6 +66,14 @@
          <h3 class="text-center">Generar Compra</h3>
              <br>
                 <label class="text-dark"> Empleado:</label>
+                <button class="btn btn-outline-danger float-end" (click)="mostrar2()">Empleados  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-video" viewBox="0 0 16 16">
+  <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+  <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2Zm10.798 11c-.453-1.27-1.76-3-4.798-3-3.037 0-4.345 1.73-4.798 3H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1.202Z"/>
+</svg></button>
+                <p *ngIf="ver1">
+                <option [value]="item" *ngFor = "let item of empleado">{{"("+item.codempleado+")  "+item.nombre+" "+item.apellido}}</option>
+                </p>
+                <br>
                 <input [(ngModel)]="codEmpleado" type="text" [ngModelOptions]="{standalone: true}"
                 class="form-control"  required>
                 <br>

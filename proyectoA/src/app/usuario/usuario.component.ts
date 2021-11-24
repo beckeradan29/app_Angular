@@ -26,11 +26,18 @@ export class UsuarioComponent implements OnInit {
   cliente: any = [];
   lista:string[]=['Puma','Shell','Texaco', 'Pacific','Castrol'];
   lista1:string[]=['GASOLINA SUPER','GASOLINA REGULAR','DIESEL FULL', 'ACEITE CASTROL'];
+  proevedor!: string;
+  product!:  string;
+  cantidad!: number;
+  precio!: number;
+  total!: number;
+  unida!: string;
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     
-    this.producto = {};
+    this.producto = {proevedor: this.proevedor, producto: this.product, cantidad: this.cantidad, precio: this.precio,
+    total: this.total};
     this.productos = [];
     this.productos1 = [];
     this.productos2 = [];
@@ -101,16 +108,54 @@ export class UsuarioComponent implements OnInit {
         'Content-Type': 'application/json'
       })
     };
+    this.producto = {proevedor: this.proevedor, producto: this.product, cantidad: this.cantidad, precio: this.precio,
+      total: this.total};
     return this.http.post<any>('http://localhost:9090/Compra/guardar', this.producto, httpOptions);
    }
    confirmar(resultado: any){
     this.loading = false;
     if (resultado){
       alert('Producto Comprado');
+      this.crear = false;
       this.producto = {};
       this.buscarProductos();
+      this.buscarProductos1();
+      this.buscarProductos2();
+      this.GuardarFacturaPDF();
     }
   }
+  GuardarFacturaPDF(){
+    var fac = new jsPDF();
+    var text = 'Empresa De Combustibles Y Lubricantes '+this.proevedor;
+    var text1 = 'Facturacion Por la compra de Productos';
+    var text2 = 'Producto: '+this.product;
+    var text3 = 'Cliente: Compra Por el Administrador';
+    if(this.product === 'GASOLINA SUPER'||this.product === 'GASOLINA REGULAR'||this.product === 'DIESEL FULL' ){
+      this.unida = 'Galones';
+    }else{
+      this.unida = 'Litros';
+    }
+    var text5 = 'Cantidad: '+this.cantidad+" "+this.unida+"    Precio: "+this.precio;
+    let number1 = this.precio;
+    let number2 = this.cantidad;
+    var text6 = 'Total Pagado: '+this.suma(number1,number2)+" quetzales";
+    let date: Date = new Date();
+    var text9 = 'Fecha de emision: '+date;
+    var text8 = 'Gracias por tu Compra Te esperamos pronto.';
+    fac.text(text, 30, 10);
+    fac.text(text1, 10, 20);
+    fac.text(text2, 10, 30);
+    fac.text(text3, 10, 40);
+    fac.text(text5, 10, 50);
+    fac.text(text6, 10, 60);
+    fac.setFontSize(13);
+    fac.text(text9, 10, 90);
+    fac.text(text8, 40, 110);
+    fac.save('fac.pdf');
+   }
+   suma(num1: number,num2: number){
+    return num1*num2;
+    }
   agregar(){
     this.crear = !this.crear;
   }

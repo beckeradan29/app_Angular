@@ -22,6 +22,12 @@
         <br>
         <br>
     </div>
+    <br>
+    <button class="btn btn-dark float-left" (click)="verVenta()">Ver Ventas  </button>
+<br>
+ <form *ngIf="ver" id="ver">
+ <br>
+ <h3>Ventas Realizadas</h3>
     <div class="row">
         <div class="col-md-12">
         <table class="table table-bordered table-white" id="resultado">
@@ -72,6 +78,120 @@
         </table>
         </div>
     </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+        <table class="table table-bordered table-white" id="resultado">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cant Ventas Producto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{tipo}}
+                    </td>
+                    <td>
+                       {{primero}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{tipo1}}
+                    </td>
+                    <td>
+                       {{segundo}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{tipo2}}
+                    </td>
+                    <td>
+                       {{tercero}}
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        {{tipo3}}
+                    </td>
+                    <td>
+                       {{cuarto}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+        <table class="table table-bordered table-white" id="resultado">
+            <thead>
+                <tr>
+                    <th>cod</th>
+                    <th>Cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor ="let clien of cliente">
+                    <td>
+                        {{clien.codcliente}}
+                    </td>
+                    <td>
+                       {{clien.nombre+" "+clien.apellido}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br>
+    <h6>Ver compras por cliente</h6>
+    <div class="row">
+        <div class="col-md-6">
+    <input type="number" [(ngModel)]="codigo1" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+    <button class="btn btn-primary float-end" (click)="buscarProductosCliente2()">Ver</button>
+    </div>
+    </div>
+    <br>
+    <h6>El cliente a echo un total de {{res1}} Compras</h6>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+        <table class="table table-bordered table-white" id="resultado">
+            <thead>
+                <tr>
+                    <th>cod</th>
+                    <th>Empleado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor ="let clien of empleado">
+                    <td>
+                        {{clien.codempleado}}
+                    </td>
+                    <td>
+                       {{clien.nombre+" "+clien.apellido}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <br>
+    <h6>Ver ventas por empleado</h6>
+    <div class="row">
+        <div class="col-md-6">
+    <input type="number" [(ngModel)]="codigo" [ngModelOptions]="{standalone: true}" placeholder="ingresa" class="form-control" required>
+    <button class="btn btn-primary float-end" (click)="buscarProductosCliente1()">Ver</button>
+    </div>
+    </div>
+    <br>
+    <h6>El empleado a echo un total de {{res}} Ventas</h6>
      </div>
      <br>
      <br>

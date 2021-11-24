@@ -12,6 +12,7 @@ import jsPDF from 'jspdf';
 })
 export class ProductosComponent implements OnInit {
   ver = false;
+  ver1 = false;
   loading = false;
   modificar = false;
   crear = false;
@@ -36,6 +37,9 @@ export class ProductosComponent implements OnInit {
   lista:string[]=['Efectivo','Cheque','Cupon'];
   lista1:string[]=['GASOLINA SUPER','GASOLINA REGULAR','DIESEL FULL','ACEITE CASTROL'];
   nombre!: string;
+  unida!: string;
+  vehiculo!: string;
+  empleado: any = [];
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -53,11 +57,31 @@ export class ProductosComponent implements OnInit {
     this.entrada = {};
     this.entradas = [];
     this.buscarProductos();
+    this.buscarEmpleados();
   }
+  buscarEmpleados(){
+    this.loading = true;
+    this.buscarEmpleadoServicio().subscribe(
+      (response: any) => this.llenarEmpleados(response)
+    );
+  }
+  buscarEmpleadoServicio(): Observable<any>{
+    return this.http.get<any>('http://localhost:9090/Empleado/buscar').pipe(
+      catchError(e => 'error')
+      );
+      }
+      llenarEmpleados(empleado: any){
+        this.empleado = empleado;
+        this.loading = false;
+       }
+
   mostrar1(): void{
   this.ver = !this.ver;
   }
-  // tslint:disable-next-line: typedef
+  mostrar2(): void{
+    this.ver1 = !this.ver1;
+    }
+  
   buscarProductos(){
     this.loading = true;
     this.buscarUsuariosServicio().subscribe(
@@ -69,7 +93,7 @@ export class ProductosComponent implements OnInit {
       catchError(e => 'error')
       );
   }
-  // tslint:disable-next-line: typedef
+
   llenarProductos(productos: any){
     this.productos = productos;
     this.loading = false;
@@ -91,8 +115,6 @@ export class ProductosComponent implements OnInit {
     if (formularioValido){
       this.loading = true;
       this.createService().subscribe(data => this.confirmar(data) );
-      this.buscarProductos();
-       this.GuardarFacturaPDF();
     }
   }
    // tslint:disable-next-line: typedef
@@ -114,21 +136,40 @@ export class ProductosComponent implements OnInit {
       alert('Compra Realizada');
       this.factura = {};
       this.modificar = false;
-      this.buscarProductos();
+      this.ngOnInit();
+      this.GuardarFacturaPDF();
     }
 }
  GuardarFacturaPDF(){
   var fac = new jsPDF();
   var text = 'Empresa De Combustibles Y Lubricantes De Guatemala S.A';
   var text1 = 'Facturacion Por la compra de Productos De Nuestra Empresa';
-  var text2 = 'Producto: '+this.producto;
+  if(this.cliente.idvehiculo === 1){
+    this.vehiculo = 'AUTOMOVIL';
+  }else if(this.cliente.idvehiculo === 2){
+    this.vehiculo = 'BUS';
+  }else if(this.cliente.idvehiculo === 3){
+    this.vehiculo = 'CAMEON';
+  }else if(this.cliente.idvehiculo === 4){
+    this.vehiculo = 'TRAILER';
+  }else if(this.cliente.idvehiculo === 5){
+    this.vehiculo = 'MOTOSICLETA';
+  }
+  var text2 = 'Producto: '+this.producto+" para tu vehiculo: "+this.vehiculo;
   var text3 = 'Cliente: '+this.cliente.nombre +" "+ this.cliente.apellido;
   var text4 = 'Nit: '+this.nit;
-  var text5 = 'Cantidad: '+this.cantidad+"  "+"Precio: "+this.costo;
+if(this.producto === 'GASOLINA SUPER'||this.producto === 'GASOLINA REGULAR'||this.producto === 'DIESEL FULL' ){
+  this.unida = 'Galones';
+}else{
+  this.unida = 'Litros';
+}
+  var text5 = 'Cantidad: '+this.cantidad+" "+this.unida+"      Precio: "+this.costo;
   let number1 = this.costo;
   let number2 = this.cantidad;
   var text6 = 'Total Pagado: '+this.suma(number1,number2)+" quetzales";
   var text7 = 'Tipo de Pago: '+this.tipoPago;
+  let date: Date = new Date();
+  var text9 = 'Fecha de emision: '+date;
   var text8 = 'Gracias por tu Compra Te esperamos pronto.';
   fac.text(text, 30, 10);
   fac.text(text1, 10, 20);
@@ -138,6 +179,8 @@ export class ProductosComponent implements OnInit {
   fac.text(text5, 10, 60);
   fac.text(text6, 10, 70);
   fac.text(text7, 10, 80);
+  fac.setFontSize(13);
+  fac.text(text9, 10, 90);
   fac.text(text8, 40, 110);
   fac.save('fac.pdf');
  }
